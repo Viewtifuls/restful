@@ -1,41 +1,41 @@
 # -*- coding: utf-8 -*-
 
+DEFAULT_PORT = 5000
+ADDITIVE_FOR_UID = 1000
+
 try:
     from os import getuid
 
 except ImportError:
     def getuid():
-        return 4000
+        return DEFAULT_PORT - ADDITIVE_FOR_UID
 
-from flask import Flask, request, render_template
-from pprint import pformat
+from flask import Flask, render_template, request, jsonify
+from urllib.request import urlopen
+from bs4 import BeautifulSoup as BS
 
 app = Flask(__name__)
 
+def count_tags(url):
+	try:
+		page = urlopen(url).read().decode()
+		soup = BS(page)
+		count = 0
+		for tag in soup.findAll():
+			count += 1
+	except:
+		count = 'not valid html'
+	return count
 
-@app.route("/")
-@app.route("/index.html")
+@app.route('/')
 def index():
-    return render_template(
-		"index.html",
-		username=request.args.get('name', 'Anonymous')
-		
-	)
-	
-@app.route("/test/<int:first>")
-@app.route("/test/<int:first>/<int:second>")
-def divides(first, second=3):
-	second = int(request.args.get('second', 0))
-	return "Yes" if number % second == 0 else "Now"
+    return render_template('index.html', url = request.args.get('url'))
 
-@app.route("/test/<anyhing>")
-def anything_str(anything):	
-	return anything
-@app.route("/hello/")
-@app.route("/hello/<username>")
-def hello(username='Anonymus'):
-	return "HELLO, {}".format(username)
+@app.route('/data')
+def data():
+	url = request.args.get('url')
+	number = count_tags(url)
+	return jsonify({"url": url, "number": number})
 
-
-if __name__ == "__main__":
-    app.run(port=getuid() + 1000, debug = True)
+if __name__ == '__main__':
+    app.run(port=getuid() + ADDITIVE_FOR_UID, debug=True)
