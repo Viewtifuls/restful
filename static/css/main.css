@@ -12,7 +12,7 @@ body {
 .jumbotron {
    display: table-cell;
    vertical-align: middle;
-   background: url("images/background.png") no-repeat center center;
+   background: url("images/background.jpg") no-repeat center center;
    background-size: cover;
 }
 
