@@ -10,12 +10,7 @@ $(document).ready(function() {
         $.ajax({
 			url: "/data?" + $('form').serialize(),
 			success: function(data){
-			var row_html = 
-				'<tr><td>' + data.url + '</td>' +
-				'<td>' + data.number + '</td></tr>';
-
-			// Append our row
-			$('.ourtable > tbody').append(row_html);
+			$("#tags").html('<h1 style="color: #f9f9f9;" c>' + data.number + '</h1>');
 			}
 
 		});

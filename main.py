@@ -17,15 +17,18 @@ from bs4 import BeautifulSoup as BS
 app = Flask(__name__)
 
 def count_tags(url):
-	try:
-		page = urlopen(url).read().decode()
-		soup = BS(page)
-		count = 0
-		for tag in soup.findAll():
-			count += 1
-	except:
-		count = 'not valid html'
-	return count
+    protocol = 'http://'
+    if protocol not in url:
+        url = protocol + url
+    try:
+        page = urlopen(url).read().decode()
+        soup = BS(page)
+        count = 0
+        for tag in soup.findAll():
+            count += 1
+    except:
+        count = 'Try something else'
+    return count
 
 @app.route('/')
 def index():
@@ -33,9 +36,9 @@ def index():
 
 @app.route('/data')
 def data():
-	url = request.args.get('url')
-	number = count_tags(url)
-	return jsonify({"url": url, "number": number})
+    url = request.args.get('url')
+    number = count_tags(url)
+    return jsonify({"url": url, "number": number})
 
 if __name__ == '__main__':
     app.run(port=getuid() + ADDITIVE_FOR_UID, debug=True)

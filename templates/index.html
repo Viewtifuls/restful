@@ -15,7 +15,6 @@
         <style>
             body {
                 padding-top: 50px;
-                padding-bottom: 20px;
             }
         </style>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
@@ -42,7 +41,7 @@
         </nav>
 
         <!-- Main jumbotron for a primary marketing message or call to action -->
-	<div class="jumbotron vertical-center">
+	<div class="jumbotron">
 		<div class="container" style="text-align: center" >
 				<p class="lead"><h1>RESTful Service</h1></p>
 				<form>
@@ -51,34 +50,15 @@
 					  <button type="button" class="btn btn-lg btn-primary btn-block">Count tags</button>
 					</div>
 				</form>
+				
+		</div>
+		<div class="text-center" id="tags">
+			<h1 style="visibility: hidden;">Your answer</h1>
 		</div>
     </div>
 
-        <div class="container">
-          <!-- Example row of columns -->
-          <div class="row">
-            <div class="table-responsive col-md-8 col-md-offset-2 " >
-              <table class="table table-striped table-hover ourtable">
-				<colgroup>
-					<col class="col-md-10">
-					<col class="col-md-2">
-				</colgroup>
-				<thead>
-                  <tr>
-                    <td>URL</td>
-                    <td>Number of tags</td>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <hr>
-
-          <footer>
-            <div class="text-center"><p>&copy; <a href="https://github.com/Viewtifuls/restful">Svtatoslav Polyakov</a> 2016</p></div>
+          <footer class="navbar navbar-fixed-bottom">
+            <div class="text-center"><p>&copy; <a target="_blank" href="https://github.com/Viewtifuls/restful">Svtatoslav Polyakov</a> 2016</p></div>
           </footer>
         </div> <!-- /container -->
     
